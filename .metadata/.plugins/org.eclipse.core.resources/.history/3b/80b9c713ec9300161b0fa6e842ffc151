@@ -1,0 +1,167 @@
+package hr.fer.zemris.optjava.dz2;
+
+import java.util.Random;
+
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.DecompositionSolver;
+import org.apache.commons.math3.linear.LUDecomposition;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
+
+public class NumOptAlgorithms {
+	
+	private static final double EPSILON = 5;
+	private static IFunction funkcija;
+	private static RealVector rjesenje;
+	private static RealVector smjerPretrage;
+	private static int brIter;
+	private static int brojVarijabli;
+	
+	public static void algoritamGradijentnogSpusta(IFunction funkcija, int brIter, RealVector pocRjesenje) {
+		
+		NumOptAlgorithms.brojVarijabli = funkcija.vratiBrojVarijabli();
+		NumOptAlgorithms.funkcija = funkcija;
+		NumOptAlgorithms.brIter = brIter;
+		
+		if(pocRjesenje == null) {
+			generirajPocetnoRjesenje();
+		} else {
+			rjesenje = pocRjesenje;
+		}
+		
+		Function fun = new Function() {
+
+			@Override
+			public RealVector apply() {
+				return funkcija.vratiVrijednostGradijentaU(rjesenje).mapMultiplyToSelf(-1);
+			}
+		};
+	
+		pretrazivanjeUZadanomSmjeru(fun);
+
+}
+
+	private static double pronadiKorak() {
+		double lambdaDonja = 0;
+		double lambdaGornja = 1;
+		
+		while(true) {
+
+			System.out.println("_______-");
+			
+			if(vratiVrijednostDerivacijeFunkcijeθU(lambdaGornja) >= 0) {
+				break;
+			}
+			lambdaGornja *=2;
+			System.out.println("_______-");
+			
+		}
+		
+		return metodaBisekcije(lambdaDonja, lambdaGornja);
+	}
+
+	private static double metodaBisekcije(double lambdaDonja, double lambdaGornja) {
+		double lambda;
+		double vrijednost;
+
+		while(true) {
+			
+			lambda = (lambdaDonja + lambdaGornja)/2;
+			vrijednost = vratiVrijednostDerivacijeFunkcijeθU(lambda);
+			
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println("...");
+			
+			System.out.println(vrijednost + " " + lambdaDonja + " " + lambdaGornja);
+			
+			if(vrijednost < EPSILON) {
+				break;
+			} else if(vrijednost > 0) {
+				lambdaGornja = lambda;
+			} else {
+				lambdaDonja = lambda;
+			}
+			
+		}
+		
+		return lambda;
+	}
+
+	private static double vratiVrijednostDerivacijeFunkcijeθU(double lambda) {
+		
+		return funkcija.vratiVrijednostGradijentaU(rjesenje.add(smjerPretrage.mapMultiply(lambda))).dotProduct(smjerPretrage);
+	}
+	
+	public static void algoritamNewtonoveMetode(IHFunction funkcija, int brIter, RealVector pocRjesenje) {
+		
+		NumOptAlgorithms.brojVarijabli = funkcija.vratiBrojVarijabli();
+		NumOptAlgorithms.funkcija = funkcija;
+		NumOptAlgorithms.brIter = brIter;
+		
+		if(pocRjesenje == null) {
+			generirajPocetnoRjesenje();
+		} else {
+			rjesenje = pocRjesenje;
+		}
+		
+		Function fun = new Function() {
+			
+			@Override
+			public RealVector apply() {
+				
+//		        RealMatrix I = stvoriJedinicnuMatricuVelicine(brojVarijabli);
+//				DecompositionSolver solver = new LUDecomposition(funkcija.vratiVrijednostHesseoveMatriceU(rjesenje)).getSolver();
+//				RealMatrix inverznaMatrica = solver.solve(I);
+//				
+//				return inverznaMatrica.scalarAdd(-1).operate(funkcija.vratiVrijednostGradijentaU(rjesenje));
+				
+				return new LUDecomposition(funkcija.vratiVrijednostHesseoveMatriceU(rjesenje)).getSolver().getInverse().scalarAdd(-1).preMultiply(funkcija.vratiVrijednostGradijentaU(rjesenje));
+			}
+
+			private RealMatrix stvoriJedinicnuMatricuVelicine(int velicina) {
+				double[][] dd = new double[velicina][velicina];
+				for(int i = 0; i < velicina; i++) {
+					dd[i][i] = 1;
+				}
+				return new Array2DRowRealMatrix(dd);
+			}
+		};
+		
+		pretrazivanjeUZadanomSmjeru(fun);
+		
+	}
+	
+	private static void generirajPocetnoRjesenje() {
+//		double[] poljeVarijabli = new double[brojVarijabli];
+//		Random rand = new Random();
+//		
+//		for(int i = 0; i < brojVarijabli; i++) {
+//			poljeVarijabli[i] = rand.nextDouble()*10 - 5;
+//		}
+		
+		double[] poljeVarijabli = new double[]{-1, 1};
+	
+		rjesenje = new ArrayRealVector(poljeVarijabli);
+	}
+
+	private static void pretrazivanjeUZadanomSmjeru(Function fun) {
+		double lambda;
+		
+		for(int k = 0; k < brIter; k++) {
+			smjerPretrage = fun.apply();
+			lambda = pronadiKorak();
+			rjesenje = rjesenje.add(smjerPretrage.mapMultiply(lambda));
+		}
+		
+		System.out.println(rjesenje);
+		
+	}
+}

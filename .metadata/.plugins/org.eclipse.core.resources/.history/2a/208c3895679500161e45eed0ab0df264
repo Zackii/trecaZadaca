@@ -1,0 +1,55 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
+public class Funkcija3 implements IHFunction {
+
+	private static final int BROJ_VARIJABLI = 10;
+	private static final int INDEKS_VRIJEDNOSTI_FUNKCIJE = 10;
+	
+	private double[][] koeficijenti;
+	
+	public Funkcija3(String putDatoteke) {
+		koeficijenti = new CitacSustavaLinJedn(putDatoteke).vratiKoeficijente();	
+	}
+	
+	@Override
+	public int vratiBrojVarijabli() {
+		return BROJ_VARIJABLI;
+	}
+
+	@Override
+	public double vratiVrijednostU(RealVector vektor) {
+		double[] x = vektor.toArray();
+		double vrijednost = 0;
+		
+		for(int i = 0; i < BROJ_VARIJABLI; i++) {
+			//poljeKoeficijenataVarijableXi = koeficijenti[i];
+			f(vektor, koeficijenti[i]);
+			
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public RealVector vratiVrijednostGradijentaU(RealVector vector) {
+		double[] x = vector.toArray();
+		double[] gradijent = new double[BROJ_VARIJABLI];
+		
+		gradijent[0] = 2*(x[0] - 4);
+		gradijent[1] = 2*(x[1] +8);
+		gradijent[2] = 2*(x[2] +5);
+		
+		return new ArrayRealVector(gradijent);
+	}
+
+	@Override
+	public RealMatrix vratiVrijednostHesseoveMatriceU(RealVector vector) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

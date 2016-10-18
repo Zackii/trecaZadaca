@@ -1,0 +1,156 @@
+package hr.fer.zemris.optjava.dz2;
+
+import java.util.Random;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.LUDecomposition;
+import org.apache.commons.math3.linear.RealVector;
+
+
+public class NumOptAlgorithms {
+	
+	private static final double EPSILON = 1;
+	private static IFunction funkcija;
+	private static RealVector rjesenje;
+	private static RealVector smjerPretrage;
+	private static int brIter;
+	private static int brojVarijabli;
+	
+	public static void algoritamGradijentnogSpusta(IFunction funkcija, int brIter, RealVector pocRjesenje) {
+		
+		NumOptAlgorithms.brojVarijabli = funkcija.vratiBrojVarijabli();
+		NumOptAlgorithms.funkcija = funkcija;
+		NumOptAlgorithms.brIter = brIter;
+		
+		if(pocRjesenje == null) {
+			generirajPocetnoRjesenje();
+		} else {
+			rjesenje = pocRjesenje;
+		}
+		
+		Function fun = new Function() {
+
+			@Override
+			public RealVector apply() {
+				return funkcija.vratiVrijednostGradijentaU(rjesenje).mapMultiplyToSelf(-1);
+			}
+		};
+	
+		pretrazivanjeUZadanomSmjeru(fun);
+
+}
+
+	private static double pronadiKorak() {
+		double lambdaDonja = 0;
+		double lambdaGornja = 1;
+		
+		while(true) {
+
+			if(vratiVrijednostDerivacijeFunkcijeθU(0) >= 0) {
+				break;
+			}
+			lambdaGornja *=2;
+			
+		}
+		System.out.println("3");
+		System.out.println(lambdaDonja +  " " + lambdaGornja);
+		return metodaBisekcije(lambdaDonja, lambdaGornja);
+	}
+
+	private static double metodaBisekcije(double lambdaDonja, double lambdaGornja) {
+		double lambda;
+		double vrijednost;
+		
+		System.out.println(lambdaDonja + " " + lambdaGornja);
+		System.exit(1);
+		while(true) {
+			
+			lambda = (lambdaDonja + lambdaGornja)/2;
+			vrijednost = vratiVrijednostDerivacijeFunkcijeθU(lambda);
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println(lambdaDonja + " " +lambdaGornja + " " + lambda + " " + vrijednost);
+			
+			if(vrijednost < EPSILON) {
+				break;
+			} else if(vrijednost > 0) {
+				lambdaDonja = lambda;
+			} else {
+				lambdaGornja = lambda;
+			}
+			
+		}
+		
+		return lambda;
+	}
+
+	private static double vratiVrijednostDerivacijeFunkcijeθU(double lambda) {
+		System.out.println();
+		System.out.println("rjesenje" + rjesenje);
+		System.out.println("smjerPretrage" + smjerPretrage);
+		System.out.println(lambda);
+		System.out.println(rjesenje.add((smjerPretrage.mapMultiply(lambda))));
+		System.out.println(funkcija.vratiVrijednostGradijentaU(rjesenje.add(smjerPretrage.mapMultiply(lambda))));
+		System.out.println(funkcija.vratiVrijednostGradijentaU(rjesenje.add(smjerPretrage.mapMultiply(lambda))).dotProduct(smjerPretrage));
+		
+		return funkcija.vratiVrijednostGradijentaU(rjesenje.add(smjerPretrage.mapMultiply(lambda))).dotProduct(smjerPretrage);
+	}
+	
+	public static void algoritamNewtonoveMetode(IHFunction funkcija, int brIter, RealVector pocRjesenje) {
+		
+		NumOptAlgorithms.brojVarijabli = funkcija.vratiBrojVarijabli();
+		NumOptAlgorithms.funkcija = funkcija;
+		NumOptAlgorithms.brIter = brIter;
+		
+		if(pocRjesenje == null) {
+			generirajPocetnoRjesenje();
+		} else {
+			rjesenje = pocRjesenje;
+		}
+		
+		Function fun = new Function() {
+			
+			@Override
+			public RealVector apply() {
+				return new LUDecomposition(funkcija.vratiVrijednostHesseoveMatriceU(rjesenje)).getSolver().getInverse().scalarAdd(-1).operate(funkcija.vratiVrijednostGradijentaU(rjesenje));
+			}
+		};
+		
+		pretrazivanjeUZadanomSmjeru(fun);
+		
+	}
+	
+	private static void generirajPocetnoRjesenje() {
+//		double[] poljeVarijabli = new double[brojVarijabli];
+//		Random rand = new Random();
+//		
+//		for(int i = 0; i < brojVarijabli; i++) {
+//			poljeVarijabli[i] = rand.nextDouble()*10 - 5;
+//		}
+		
+		double[] poljeVarijabli = new double[]{-1, 1};
+	
+		rjesenje = new ArrayRealVector(poljeVarijabli);
+	}
+
+	private static void pretrazivanjeUZadanomSmjeru(Function fun) {
+		double lambda;
+		
+		for(int k = 0; k < brIter; k++) {
+			smjerPretrage = fun.apply();
+			System.out.println("1");
+			lambda = pronadiKorak();
+			System.out.println("2");
+			rjesenje = rjesenje.add(smjerPretrage.mapMultiply(lambda));
+		}
+		
+		System.out.println(rjesenje);
+		
+	}
+}

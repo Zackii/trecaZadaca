@@ -1,0 +1,90 @@
+package hr.fer.zemris.optjava.dz2;
+
+import Jama.Matrix;
+
+public class NumOptAlgorithms {
+	
+	private static final double EPSILON = 1;
+	private static IFunction funkcija;
+	private static double[] rjesenje;
+	private static double[] smjerPretrage;
+	
+
+	public static void algoritamGradijentnogSpusta(final IFunction funkcija, int brIter) {
+		
+		NumOptAlgorithms.funkcija = funkcija;
+		rjesenje = new double[funkcija.getNumberOfVariables()];
+		
+		double[] smjerPretrage;
+		double lambda;
+		
+		for(int k = 0; k < brIter; k++) {
+			
+			smjerPretrage = utvrdiSmjerPretrage(funkcija, rjesenje);
+			lambda = pronadiKorak(funkcija, smjerPretrage, rjesenje);
+			
+			for(int i = 0; i < rjesenje.length; i++) {
+				rjesenje[i] = rjesenje[i] + lambda*smjerPretrage[i];
+			}
+			
+		}
+		
+	}
+
+	private static double pronadiKorak(IFunction funkcija, double[] smjerPretrage, double[] rjesenje) {
+		
+		
+		double lambdaDonja = 0;
+		double lambdaGornja = 1;
+		double  derivacijaFunkcijeθ; //θ(λ) = f(x + λ·d)
+		
+		while(true) {
+			
+			derivacijaFunkcijeθ = derivacijaFunkcije(funkcija, smjerPretrage, rjesenje);
+			
+			if(derivacijaFunkcijeθ > 0) {
+				break;
+			}
+			lambdaGornja *=2;
+			
+		}
+		
+		return metodaBisekcije(lambdaDonja, lambdaGornja, funkcija, smjerPretrage, rjesenje);
+	}
+
+	private static double derivacijaFunkcije(IFunction funkcija, double[] smjerPretrage, double[] rjesenje) {
+		double derivacijaFunkcijeθ;
+		derivacijaFunkcijeθ = 0;
+		double[] gradijent = funkcija.getValueOfGradientAt(rjesenje);
+		for(int i = 0, n = funkcija.getNumberOfVariables(); i < n; i++) {
+			derivacijaFunkcijeθ += gradijent[i]*smjerPretrage[i];
+		}
+		return derivacijaFunkcijeθ;
+	}
+
+	private static double metodaBisekcije(double lambdaDonja, double lambdaGornja, IFunction funkcija,
+			double[] smjerPretrage, double[] rjesenje) {
+		
+		double lambda;
+		double  derivacijaFunkcijeθ;
+		
+		while(true) {
+			
+			derivacijaFunkcijeθ = derivacijaFunkcije(funkcija, smjerPretrage, );
+			
+		}
+		
+		return 0;
+	}
+
+	private static double[] utvrdiSmjerPretrage(IFunction funkcija, double[] rjesenje) {
+		
+		double[] gradijent = funkcija.getValueOfGradientAt(rjesenje);
+		for(int i = 0; i < gradijent.length; i++) {
+			gradijent[i] = -gradijent[i];
+		}
+		return gradijent;
+
+	}
+	
+}

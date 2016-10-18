@@ -1,0 +1,47 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
+public class Function2 implements IHFunction {
+
+	private final int brojVarijabli = 2;
+	
+	@Override
+	public int vratiBrojVarijabli() {
+		return brojVarijabli;
+	}
+
+	@Override
+	public double vratiVrijednostU(RealVector vector) {
+		double[] x = vector.toArray();
+		return (x[0] - 1)*(x[0] - 1) + 10*(x[1] - 2)*(x[1] - 2);
+	}
+
+	@Override
+	public RealVector vratiVrijednostGradijentaU(RealVector vector) {
+		double[] x = vector.toArray();
+		double[] gradijent = new double[brojVarijabli];
+		
+		gradijent[0] = 2*(x[0] - 1);
+		gradijent[1] = 20*(x[1] - 2);
+		
+		return new ArrayRealVector(gradijent);
+	}
+
+	@Override
+	public RealMatrix vratiVrijednostHesseoveMatriceU(RealVector vector) {
+		double[] x = vector.toArray();
+		double[][] gradijent = new double[brojVarijabli][brojVarijabli];
+		
+		gradijent[0][0] = 2;
+		gradijent[0][1] = 0;
+		gradijent[1][0] = 20;
+		gradijent[1][1] = 0;
+		
+		return new Array2DRowRealMatrix(gradijent);
+	}
+
+}

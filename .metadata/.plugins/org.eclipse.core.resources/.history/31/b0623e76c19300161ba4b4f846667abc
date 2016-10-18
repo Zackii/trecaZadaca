@@ -1,0 +1,26 @@
+package hr.fer.zemris.optjava.dz2;
+
+public class Jednostavno {
+
+	public static void main(String[] args) {
+		
+		if(args.length == 2) {
+			switch(args[0]) {
+				case "1a":
+					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), 100_000, null);
+				case "1b":
+					NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), 100_000, null);
+				case "2a":
+					System.out.println();
+				case "2b":
+					System.out.println();
+				
+				
+			}
+			
+			
+		}
+		
+	}
+	
+}

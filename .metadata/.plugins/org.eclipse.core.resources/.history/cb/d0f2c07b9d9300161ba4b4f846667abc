@@ -1,0 +1,46 @@
+package hr.fer.zemris.optjava.dz2;
+
+import Jama.Matrix;
+
+public class NumOptAlgorithms {
+
+	public static void algoritamGradijentnogSpusta(IFunction funkcija, int brIter) {
+		
+		double[] rjesenje = new double[funkcija.getNumberOfVariables()];
+		
+		double[] smjerPretrage;
+		double lambda;
+		
+		for(int k = 0; k < brIter; k++) {
+			
+			smjerPretrage = utvrdiSmjerPretrage(funkcija, rjesenje);
+			lambda = pronadiKorak(funkcija, smjerPretrage, rjesenje);
+			
+			for(int i = 0; i < rjesenje.length; i++) {
+				rjesenje[i] = rjesenje[i] + lambda*smjerPretrage[i];
+			}
+			
+		}
+		
+	}
+
+	private static double pronadiKorak(IFunction funkcija, double[] smjerPretrage, double[] rjesenje) {
+		
+		
+		double lambdaDonja = 0;
+		double lambdaGornja = 1;
+		
+		return 0;
+	}
+
+	private static double[] utvrdiSmjerPretrage(IFunction funkcija, double[] rjesenje) {
+		
+		double[] d = funkcija.getValueOfGradientAt(rjesenje);
+		for(int i = 0; i < d.length; i++) {
+			d[i] = -d[i];
+		}
+		return d;
+
+	}
+	
+}

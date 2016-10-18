@@ -1,0 +1,30 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.RealVector;
+
+public class Function1 implements IFunction {
+	
+	private final int brojVarijabli = 2;
+	
+	public Function1() {
+		super();
+	}
+	
+	@Override
+	public int vratiBrojVarijabli() {
+		return brojVarijabli;
+	}
+
+	@Override
+	public double vratiVrijednostU(RealVector vector) {
+		double[] x = vector.toArray();
+		return x[0]*x[0] + (x[1] - 1)*(x[1] - 1);
+	}
+
+	@Override
+	public RealVector vratiVrijednostGradijentaU(RealVector vector) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

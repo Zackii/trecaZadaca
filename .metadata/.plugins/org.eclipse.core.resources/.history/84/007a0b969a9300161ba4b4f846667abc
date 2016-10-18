@@ -1,0 +1,11 @@
+package hr.fer.zemris.optjava.dz2;
+
+import Jama.Matrix;
+
+public interface IFunction {
+
+	int getNumberOfVariables();
+	double getValueAt(Matrix vector);
+	double getValueOfGradientAt(double[] vector);
+	
+}

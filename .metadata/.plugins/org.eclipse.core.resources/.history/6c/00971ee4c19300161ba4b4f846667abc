@@ -1,0 +1,39 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
+
+public class Jednostavno {
+
+	public static void main(String[] args) {
+		
+		if(args.length == 2) {
+			switch(args[0]) {
+				case "1a":
+					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), 100_000, null);
+				case "1b":
+					NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), 100_000, null);
+				case "2a":
+					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), 100_000, null);
+				case "2b":
+					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), 100_000, null);
+			}
+		} else {
+			double[] pocVrijednostiVarijabli = new double[2];
+			pocVrijednostiVarijabli[0] = Double.parseDouble(args[2]);
+			pocVrijednostiVarijabli[0] = Double.parseDouble(args[3]);
+			RealVector vector = new ArrayRealVector(pocVrijednostiVarijabli);
+			switch(args[0]) {
+			case "1a":
+				NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), 100_000, null);
+			case "1b":
+				NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), 100_000, null);
+			case "2a":
+				NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), 100_000, null);
+			case "2b":
+				NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), 100_000, null);
+		}
+		}
+		
+	}
+	
+}

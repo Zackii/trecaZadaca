@@ -1,0 +1,23 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.LUDecomposition;
+import org.apache.commons.math3.linear.RealVector;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		IFunction f1 = new Function1();
+		
+		RealVector rjesenje = new ArrayRealVector(new double[]{-1, 1});
+		
+		return new LUDecomposition(f1.vratiVrijednostHesseoveMatriceU(rjesenje))
+				.getSolver()
+				.getInverse()
+				.scalarAdd(-1)
+				.preMultiply(funkcija.vratiVrijednostGradijentaU(rjesenje));
+		
+	}
+	
+}

@@ -1,0 +1,11 @@
+package hr.fer.zemris.optjava.dz2;
+
+import Jama.Matrix;
+
+public class NumOptAlgorithms {
+
+	public static void f1(IFunction function, int numOfIter) {
+		
+	}
+	
+}

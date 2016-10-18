@@ -1,0 +1,70 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
+public class Funkcija3 implements IHFunction {
+
+	private static final int BROJ_VARIJABLI = 10;
+	private static final int INDEKS_VRIJEDNOSTI_FUNKCIJE = 10;
+	
+	private double[][] koeficijenti;
+	
+	public Funkcija3(String putDatoteke) {
+		koeficijenti = new CitacSustavaLinJedn(putDatoteke).vratiKoeficijente();	
+	}
+	
+	@Override
+	public int vratiBrojVarijabli() {
+		return BROJ_VARIJABLI;
+	}
+
+	@Override
+	public double vratiVrijednostU(RealVector vektor) {
+		double[] x = vektor.toArray();
+		double vrijednostIteLinJedn;
+		double sumaRazlikeKvadrata = 0;
+		
+		for(int i = 0; i < BROJ_VARIJABLI; i++) {
+			vrijednostIteLinJedn = vrijednostIteLinJednZaDanoPoljeXa(i, x);
+			sumaRazlikeKvadrata = Math.pow(vrijednostIteLinJedn - koeficijenti[i][INDEKS_VRIJEDNOSTI_FUNKCIJE], 2);
+		}
+		
+		return sumaRazlikeKvadrata;
+	}
+
+	private double vrijednostIteLinJednZaDanoPoljeXa(int i, double[] x) {
+		
+		int vrijednost = 0;
+		for(int j = 0; i < BROJ_VARIJABLI; j++) {
+			vrijednost += koeficijenti[i][j]*x[j];
+		}
+		
+		return vrijednost;
+	}
+
+	@Override
+	public RealVector vratiVrijednostGradijentaU(RealVector vector) {
+		double[] x = vector.toArray();
+		double[] gradijent = new double[BROJ_VARIJABLI];
+		double[] poljeParcijalnihDerivacija = new double[BROJ_VARIJABLI];
+		double vrijednostIteLinJedn = 0;
+		
+		
+		for (int i = 0; i < BROJ_VARIJABLI; i++) {
+			
+			vrijednostIteLinJedn = vrijednostIteLinJednZaDanoPoljeXa(i, x);
+			
+		}
+		
+		return new ArrayRealVector(gradijent);
+	}
+
+	@Override
+	public RealMatrix vratiVrijednostHesseoveMatriceU(RealVector vector) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

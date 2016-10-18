@@ -1,0 +1,46 @@
+package hr.fer.zemris.optjava.dz2;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class CitacSustavaLinJedn {
+	
+	private double[][] koeficijenti;
+	private Path putDatoteke;
+//	private static final String LINE_SPLIT_REGEX = ", +";
+//	private static final String BRACKETS_REGEX = "\\[|\\]";
+	
+	// svaki redak je oblika: [n1, n2, ..., n10, y]
+	private static final int BROJ_KOEFICIJENATA_U_REDU = 11;
+	private static final int BROJ_JEDNADZBI = 10;
+
+	public CitacSustavaLinJedn(String putDatoteke) {
+		this.putDatoteke = Paths.get(putDatoteke);
+		koeficijenti = new double[BROJ_JEDNADZBI][BROJ_KOEFICIJENATA_U_REDU];
+		izvuciKoeficijente();
+	}
+
+	private void izvuciKoeficijente() {
+		BufferedReader br = otvoriTok();
+		
+		
+		
+	}
+
+	private BufferedReader otvoriTok() {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream("datoteka.txt")), StandardCharsets.UTF_8));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("Citanje datoteke nije uspijelo");
+		}
+		return br;
+	}
+	
+}

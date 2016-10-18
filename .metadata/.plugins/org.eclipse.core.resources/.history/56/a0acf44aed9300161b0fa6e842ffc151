@@ -1,0 +1,40 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.RealVector;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		IFunction f1 = new Function1();
+		
+//		System.out.println(f1.vratiBrojVarijabli());
+//		System.out.println(f1.vratiVrijednostU(new ArrayRealVector(new double[]{1, 1})));
+//		System.out.println(f1.vratiVrijednostGradijentaU(new ArrayRealVector(new double[]{1, 1})));
+//		System.out.println(f1.vratiVrijednostGradijentaU(new ArrayRealVector(new double[]{1, 1})).mapMultiplyToSelf(-1));
+//		
+//		double lambda = -5;
+//		RealVector rjesenje = new ArrayRealVector(new double[]{5, 5});
+//		RealVector smjerPretrage = new ArrayRealVector(new double[]{2, 2});
+//		
+//		//System.out.println(rjesenje.add((smjerPretrage.mapMultiply(lambda))));
+//		
+//		double d = f1.vratiVrijednostGradijentaU(new ArrayRealVector(rjesenje.add((smjerPretrage.mapMultiply(lambda))))).dotProduct(smjerPretrage);
+//		
+//		System.out.println(d);
+		
+		IFunction f3 = new Funkcija3();
+		RealVector rjesenje = new ArrayRealVector(new double[]{6, -10, -9});
+		RealVector smjerPretrage = new ArrayRealVector(new double[]{-1, 2, 1});
+		
+		for(int i = 0; i < 5; i++) {
+			System.out.println(rjesenje + " " + rjesenje.add((smjerPretrage.mapMultiply(i))) + " " + f3.vratiVrijednostGradijentaU(new ArrayRealVector(rjesenje.add((smjerPretrage.mapMultiply(i))))));
+			
+		}
+		
+		System.out.println(rjesenje.add((smjerPretrage.mapMultiply(1))));
+		System.out.println(rjesenje);
+	}
+	
+}
