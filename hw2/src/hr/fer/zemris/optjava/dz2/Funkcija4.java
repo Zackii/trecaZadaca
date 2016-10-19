@@ -7,8 +7,10 @@ import org.apache.commons.math3.linear.RealVector;
 
 public class Funkcija4 implements IHFunction {
 
-	private static final int BROJ_VARIJABLI = 6;
-	private static final int INDEKS_VRIJEDNOSTI_FUNKCIJE = 10;
+	private static final int BROJ_VARIJABLI = 5;
+	private static final int BROJ_KONSTANTI = 6;
+	private static final int INDEKS_VRIJEDNOSTI_FUNKCIJE = 5;
+	private static final int BROJ_LINIJA = 20;
 
 	private double[][] varijable;
 
@@ -18,7 +20,7 @@ public class Funkcija4 implements IHFunction {
 
 	@Override
 	public int vratiBrojVarijabli() {
-		return BROJ_VARIJABLI;
+		return BROJ_KONSTANTI;
 	}
 
 	@Override
@@ -43,29 +45,34 @@ public class Funkcija4 implements IHFunction {
 	@Override
 	public RealVector vratiVrijednostGradijentaU(RealVector vector) {
 		double[] poljeKonstanti = vector.toArray();
-		double[] gradijent = new double[BROJ_VARIJABLI];
+		double[] gradijent = new double[BROJ_KONSTANTI];
+		double[] poljeRazlika = new double[BROJ_LINIJA];
+		
+		for(int i = 0; i < BROJ_LINIJA; i++) {
+			poljeRazlika[i] = vrijednostIteLinJednZaDanoPoljeXa(varijable[i], poljeKonstanti) - varijable[i][INDEKS_VRIJEDNOSTI_FUNKCIJE];
+		}
 
-		izracunajGradijent(poljeKonstanti, gradijent, varijable);
+		izracunajGradijent(poljeKonstanti, gradijent, varijable, poljeRazlika);
 
 		return new ArrayRealVector(gradijent);
 	}
 
-	private void izracunajGradijent(double[] konst, double[] gradijent, double[][] var) {
+	private void izracunajGradijent(double[] konst, double[] gradijent, double[][] var, double[] poljeRazlika) {
 
-		gradijent[0] = vrijednostParcijalneDerivacijePoKonstanti((i) -> var[i][0]);
+		gradijent[0] = vrijednostParcijalneDerivacijePoKonstanti((i) -> 2*poljeRazlika[i]*var[i][0]);
 
-		gradijent[1] = vrijednostParcijalneDerivacijePoKonstanti((i) -> Math.pow(var[i][0], 3) * var[i][1]);
+		gradijent[1] = vrijednostParcijalneDerivacijePoKonstanti((i) -> 2*poljeRazlika[i]*Math.pow(var[i][0], 3) * var[i][1]);
 
 		gradijent[2] = vrijednostParcijalneDerivacijePoKonstanti(
-				(i) -> Math.pow(Math.E, konst[3] * var[i][2]) * (1 + Math.cos(konst[4] * var[i][3])));
+				(i) -> 2*poljeRazlika[i]*Math.pow(Math.E, konst[3] * var[i][2]) * (1 + Math.cos(konst[4] * var[i][3])));
 
-		gradijent[3] = vrijednostParcijalneDerivacijePoKonstanti((i) -> konst[2] * var[i][2]
+		gradijent[3] = vrijednostParcijalneDerivacijePoKonstanti((i) -> 2*poljeRazlika[i]*konst[2] * var[i][2]
 				* Math.pow(Math.E, konst[3] * var[i][2]) * (1 + Math.cos(konst[4] * var[i][3])));
 
-		gradijent[4] = vrijednostParcijalneDerivacijePoKonstanti((i) -> -var[i][3] * konst[2]
-				* Math.pow(Math.E, konst[3] * var[i][2]) * (1 + Math.sin(konst[4] * var[i][3])));
+		gradijent[4] = vrijednostParcijalneDerivacijePoKonstanti((i) -> -2*poljeRazlika[i]*var[i][3] * konst[2]
+				* Math.pow(Math.E, konst[3] * var[i][2]) * (Math.sin(konst[4] * var[i][3])));
 
-		gradijent[5] = vrijednostParcijalneDerivacijePoKonstanti((i) -> var[i][3] * Math.pow(var[i][4], 2));
+		gradijent[5] = vrijednostParcijalneDerivacijePoKonstanti((i) -> 2*poljeRazlika[i]*var[i][3] * Math.pow(var[i][4], 2));
 
 	}
 
@@ -80,7 +87,12 @@ public class Funkcija4 implements IHFunction {
 	@Override
 	public RealMatrix vratiVrijednostHesseoveMatriceU(RealVector vector) {
 		double[] poljeKonstanti = vector.toArray();
-		double[][] hesseovaMatrica = new double[BROJ_VARIJABLI][BROJ_VARIJABLI];
+		double[][] hesseovaMatrica = new double[BROJ_KONSTANTI][BROJ_KONSTANTI];
+		double[] poljeRazlika = new double[BROJ_LINIJA];
+		
+		for(int i = 0; i < BROJ_LINIJA; i++) {
+			poljeRazlika[i] = vrijednostIteLinJednZaDanoPoljeXa(varijable[i], poljeKonstanti) - varijable[i][INDEKS_VRIJEDNOSTI_FUNKCIJE];
+		}
 
 		izracunajHesseovuMatricu(poljeKonstanti, hesseovaMatrica, varijable);
 
@@ -88,6 +100,9 @@ public class Funkcija4 implements IHFunction {
 	}
 
 	private void izracunajHesseovuMatricu(double[] konst, double[][] hesseovaMatrica, double[][] var) {
+		
+//		hesseovaMatrica[0][0] = vrijednostParcijalneDerivacijePoKonstanti(
+//				(i) -> 2*poljeRazlika[i]*var[i][0]);
 
 		hesseovaMatrica[2][3] = vrijednostParcijalneDerivacijePoKonstanti(
 				(i) -> var[i][2] * Math.pow(Math.E, konst[3] * var[i][2]) * (1 + Math.cos(konst[4] * var[i][3])));

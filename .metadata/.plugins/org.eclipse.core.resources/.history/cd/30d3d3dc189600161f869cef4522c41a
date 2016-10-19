@@ -1,0 +1,20 @@
+package hr.fer.zemris.optjava.dz2;
+
+public class Main {
+
+	public static void main(String args[]) {
+
+		double[] ds = new double[] { 6.2876943036, -2.9236880464, 2.041825885, 0.9905305111, 8.2809466141, 2.9986102485 };
+
+		double[] ks = new double[] { -3.000, 0.000, 3.000, 0.000, -3.000, 2.000, 0.000, -3.000, -1.000, -2.000 };
+
+		double sum = 0;
+		for (int i = 0; i < 10; i++) {
+			sum += ds[i] * ks[i];
+		}
+
+		System.out.println(sum);
+
+	}
+
+}

@@ -1,0 +1,14 @@
+package hr.fer.zemris.optjava.dz2;
+
+public class Main {
+
+	public static void main(String args[]) {
+
+		double[] ds = new double[] { -10.5912507244, -3.056136901, 12.0522471421, 9.345791016, -3.0046489197,
+				2.0610292584, 4.3338216146, -2.9206543705, -13.9997558594, -6.3328055191 };
+		
+		
+
+	}
+
+}

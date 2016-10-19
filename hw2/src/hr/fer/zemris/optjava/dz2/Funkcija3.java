@@ -36,9 +36,9 @@ public class Funkcija3 implements IHFunction {
 	}
 
 	private double vrijednostIteLinJednZaDanoPoljeXa(int i, double[] x) {
-		
 		int vrijednost = 0;
-		for(int j = 0; i < BROJ_VARIJABLI; j++) {
+		
+		for(int j = 0; j < BROJ_VARIJABLI; j++) {
 			vrijednost += koeficijenti[i][j]*x[j];
 		}
 		
@@ -63,7 +63,6 @@ public class Funkcija3 implements IHFunction {
 
 	@Override
 	public RealMatrix vratiVrijednostHesseoveMatriceU(RealVector vector) {
-		double[] x = vector.toArray();
 		double[][] hesseovaMatrica = new double[BROJ_VARIJABLI][BROJ_VARIJABLI];
 		
 		for (int i = 0; i < BROJ_VARIJABLI; i++) {
