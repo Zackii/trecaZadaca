@@ -10,10 +10,14 @@ public class Funkcija3 implements IHFunction {
 	private static final int BROJ_VARIJABLI = 10;
 	private static final int INDEKS_VRIJEDNOSTI_FUNKCIJE = 10;
 	
+	private static final int BROJ_KOEFICIJENATA_U_REDU = 11;
+	
 	private double[][] koeficijenti;
 	
 	public Funkcija3(String putDatoteke) {
-		koeficijenti = new CitacSustavaLinJedn(putDatoteke).vratiKoeficijente();	
+		CitacSustava citac = new CitacSustava(putDatoteke, BROJ_KOEFICIJENATA_U_REDU);
+		koeficijenti = citac.vratiKoeficijente();
+		
 	}
 	
 	@Override

@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class CitacSustavaLinJedn {
+public class CitacSustava {
 	
 	private double[][] koeficijenti;
 	private Path putDatoteke;
@@ -18,12 +18,14 @@ public class CitacSustavaLinJedn {
 	private static final String ZAGRADE_REGEX = "\\[|\\]";
 	
 	// svaki redak je oblika: [n1, n2, ..., n10, y]
-	private static final int BROJ_KOEFICIJENATA_U_REDU = 6;
-	private static final int BROJ_JEDNADZBI = 20;
+	private int brojKoeficijenataURedu;
+	private int brojJednadzbi = 20;
 
-	public CitacSustavaLinJedn(String putDatoteke) {
+	public CitacSustava(String putDatoteke, int brojKoeficijenataURedu) {
 		this.putDatoteke = Paths.get(putDatoteke);
-		koeficijenti = new double[BROJ_JEDNADZBI][BROJ_KOEFICIJENATA_U_REDU];
+		this.brojKoeficijenataURedu = brojKoeficijenataURedu;
+		
+		koeficijenti = new double[brojJednadzbi][brojKoeficijenataURedu];
 		
 		izvuciKoeficijente();
 	}
@@ -46,7 +48,8 @@ public class CitacSustavaLinJedn {
 			if (linija.startsWith("#")) //komentar
 				continue;
 
-			koeficijenti[i++] = izvuciKoeficijenteIzLinije(linija);			
+			koeficijenti[i] = izvuciKoeficijenteIzLinije(linija);
+			i++;
 		}
 		
 	}
@@ -68,9 +71,9 @@ public class CitacSustavaLinJedn {
 		
 		String[] split = linija.split(LINIJE_RAZDJELI_REGEX); //odvoji koeficijente
 
-		double[] koeficijenti = new double[BROJ_KOEFICIJENATA_U_REDU];
+		double[] koeficijenti = new double[brojKoeficijenataURedu];
 
-		for (int i = 0; i < BROJ_KOEFICIJENATA_U_REDU; i++) {
+		for (int i = 0; i < brojKoeficijenataURedu; i++) {
 			koeficijenti[i] = Double.parseDouble(split[i]);
 		}
 
@@ -89,6 +92,10 @@ public class CitacSustavaLinJedn {
 	
 	public double[][] vratiKoeficijente() {
 		return koeficijenti;
+	}
+	
+	public int vratiBrojJednadzbi() {
+		return brojJednadzbi;
 	}
 	
 }

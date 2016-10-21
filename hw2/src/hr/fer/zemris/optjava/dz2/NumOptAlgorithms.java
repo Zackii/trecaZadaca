@@ -18,7 +18,7 @@ public class NumOptAlgorithms {
 	private static RealVector smjerPretrage;
 	private static int brIter;
 	
-	public static void algoritamGradijentnogSpusta(IFunction funkcija, int brIter, RealVector pocRjesenje) {
+	public static RealVector algoritamGradijentnogSpusta(IFunction funkcija, int brIter, RealVector pocRjesenje) {
 		
 		NumOptAlgorithms.funkcija = funkcija;
 		NumOptAlgorithms.brIter = brIter;
@@ -29,7 +29,7 @@ public class NumOptAlgorithms {
 			rjesenje = pocRjesenje;
 		}
 		
-		Function fun = new Function() {
+		IOdrediSmjerPretrage fun = new IOdrediSmjerPretrage() {
 
 			@Override
 			public RealVector apply() {
@@ -38,6 +38,7 @@ public class NumOptAlgorithms {
 		};
 	
 		pretrazivanjeUZadanomSmjeru(fun);
+		return rjesenje;
 
 }
 
@@ -84,7 +85,7 @@ public class NumOptAlgorithms {
 		return funkcija.vratiVrijednostGradijentaU(rjesenje.add(smjerPretrage.mapMultiply(lambda))).dotProduct(smjerPretrage);
 	}
 	
-	public static void algoritamNewtonoveMetode(IHFunction funkcija, int brIter, RealVector pocRjesenje) {
+	public static RealVector algoritamNewtonoveMetode(IHFunction funkcija, int brIter, RealVector pocRjesenje) {
 		
 		NumOptAlgorithms.funkcija = funkcija;
 		NumOptAlgorithms.brIter = brIter;
@@ -95,7 +96,7 @@ public class NumOptAlgorithms {
 			rjesenje = pocRjesenje;
 		}
 		
-		Function fun = new Function() {
+		IOdrediSmjerPretrage fun = new IOdrediSmjerPretrage() {
 			
 			@Override
 			public RealVector apply() {
@@ -136,6 +137,7 @@ public class NumOptAlgorithms {
 		};
 		
 		pretrazivanjeUZadanomSmjeru(fun);
+		return rjesenje;
 		
 	}
 	
@@ -150,7 +152,7 @@ public class NumOptAlgorithms {
 		rjesenje = new ArrayRealVector(poljeVarijabli);
 	}
 
-	private static void pretrazivanjeUZadanomSmjeru(Function fun) {
+	private static void pretrazivanjeUZadanomSmjeru(IOdrediSmjerPretrage fun) {
 		double lambda;
 		
 		for(int k = 0; k < brIter; k++) {
@@ -158,8 +160,6 @@ public class NumOptAlgorithms {
 			lambda = pronadiKorak();
 			rjesenje = rjesenje.add(smjerPretrage.mapMultiply(lambda));
 		}
-		
-		System.out.println(rjesenje);
 		
 	}
 }

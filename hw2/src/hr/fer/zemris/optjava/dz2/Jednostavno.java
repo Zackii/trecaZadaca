@@ -9,19 +9,21 @@ public class Jednostavno {
 		
 		int brojteracija = Integer.parseInt(args[1]);
 		
+		RealVector rjesenje = null;
+		
 		if(args.length == 2) {
 			switch(args[0]) {
 				case "1a":
-					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), brojteracija, null);
+					rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), brojteracija, null);
 					break;
 				case "1b":
-					NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), brojteracija, null);
+					rjesenje = NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), brojteracija, null);
 					break;
 				case "2a":
-					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, null);
+					rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, null);
 					break;
 				case "2b":
-					NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, null);
+					rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, null);
 			}
 		} else {
 			double[] pocVrijednostiVarijabli = new double[2];
@@ -30,18 +32,21 @@ public class Jednostavno {
 			RealVector vector = new ArrayRealVector(pocVrijednostiVarijabli);
 			switch(args[0]) {
 			case "1a":
-				NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), brojteracija, vector);
+				rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Function1(), brojteracija, vector);
 				break;
 			case "1b":
-				NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), brojteracija, vector);
+				rjesenje = NumOptAlgorithms.algoritamNewtonoveMetode(new Function1(), brojteracija, vector);
 				break;
 			case "2a":
-				NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, vector);
+				rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, vector);
 				break;
 			case "2b":
-				NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, vector);
+				rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Function2(), brojteracija, vector);
+			}
+			
 		}
-		}
+		
+		System.out.println("rjesenje:" + rjesenje);
 		
 	}
 	
