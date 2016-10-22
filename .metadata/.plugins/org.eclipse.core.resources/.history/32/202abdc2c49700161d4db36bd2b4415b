@@ -1,0 +1,16 @@
+package hr.fer.zemris.optjava.dz3;
+
+public class SingleObjectiveSolution {
+
+	private double fitness;
+	private double value;
+	
+	public SingleObjectiveSolution() {
+		
+	}
+	
+	public int compareTo(SingleObjectiveSolution sos) {
+		return 0;
+	}
+	
+}

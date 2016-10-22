@@ -1,0 +1,10 @@
+package hr.fer.zemris.optjava.dz3;
+
+public class GreyBinaryDecoder {
+
+	public GreyBinaryDecoder(double d1, double d2, int n1, int n2) {
+		
+	}
+	
+	
+}

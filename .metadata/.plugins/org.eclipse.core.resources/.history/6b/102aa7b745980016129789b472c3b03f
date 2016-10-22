@@ -1,0 +1,35 @@
+package hr.fer.zemris.optjava.dz3;
+
+public abstract class BitvectorDecoder implements IDecoder<BitvectorSolution> {
+
+	double[] mins;
+	double[] maxs;
+	int[] bits;
+	int n;
+	int totalBits;
+	
+	public BitvectorDecoder(double[] mins, double[] maxs, int[] bits, int n) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public BitvectorDecoder(double min, double max, int bit, int n) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public int getTotalBits() {
+		return totalBits;
+	}
+	
+	public int getDimensions() {
+		return n;
+	}
+	
+	@Override
+	public abstract double[] decode(BitvectorSolution t);
+
+	@Override
+	public abstract void decode(BitvectorSolution t, double[] vector);
+
+	
+	
+}

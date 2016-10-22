@@ -1,0 +1,19 @@
+package hr.fer.zemris.optjava.dz3;
+
+public class DoubleArraySolution extends SingleObjectiveSolution {
+
+	private double[] values;
+	
+	public DoubleArraySolution(int n) {
+		
+	}
+	
+	public DoubleArraySolution newLikeThis() {
+		return null;
+	}
+	
+	public DoubleArraySolution duplicate() {
+		return null;
+	}
+	
+}

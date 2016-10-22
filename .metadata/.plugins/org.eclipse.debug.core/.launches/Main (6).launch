@@ -7,5 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="hr.fer.zemris.optjava.dz2.Prijenosna"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="newton 1000 .\ulazneDatoteke\sustav.txt"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="hw2"/>
 </launchConfiguration>

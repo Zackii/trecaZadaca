@@ -1,0 +1,13 @@
+package hr.fer.zemris.optjava.dz3;
+
+public class SimulatedAnnealing<T> implements IOptAlgorithm<T> {
+
+	
+	
+	@Override
+	public T run() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

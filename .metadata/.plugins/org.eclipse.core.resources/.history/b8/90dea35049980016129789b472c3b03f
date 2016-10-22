@@ -1,0 +1,17 @@
+package hr.fer.zemris.optjava.dz3;
+
+import java.util.Random;
+
+public class DoubleArrayUnifNeighborhood {
+
+	private double[] deltas;
+	
+	protected Random rand;
+	
+	public DoubleArrayUnifNeighborhood(double[] ds) {
+		
+	}
+	
+	
+	
+}

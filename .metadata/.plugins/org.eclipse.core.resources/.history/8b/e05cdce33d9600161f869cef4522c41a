@@ -1,0 +1,27 @@
+package hr.fer.zemris.optjava.dz2;
+
+import org.apache.commons.math3.linear.RealVector;
+
+public class Sustav {
+
+	public static void main(String[] args) {
+		
+		if(args.length != 3) {
+			System.err.println("Program ocekuje 3 argumenta");
+			System.exit(1);
+		}
+		
+		RealVector rjesenje = null;
+		 
+		if(args[0].equals("grad")) {
+			rjesenje = NumOptAlgorithms.algoritamGradijentnogSpusta(new Funkcija3(args[2]), Integer.parseInt(args[1]), null);
+		} else if(args[0].equals("newton")) {
+			rjesenje = NumOptAlgorithms.algoritamNewtonoveMetode(new Funkcija3(args[2]), Integer.parseInt(args[1]), null);
+		}
+		
+		System.out.println("rjesenje:");
+		System.out.println(rjesenje);
+		
+	}
+	
+}

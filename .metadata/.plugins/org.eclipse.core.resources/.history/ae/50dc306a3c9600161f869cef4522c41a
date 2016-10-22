@@ -1,0 +1,20 @@
+package hr.fer.zemris.optjava.dz2;
+
+public class Prijenosna {
+
+	public static void main(String[] args) {
+		
+		if(args.length != 3) {
+			System.err.println("Program ocekuje 3 argumenta");
+			System.exit(1);
+		}
+		 
+		if(args[0].equals("grad")) {
+			NumOptAlgorithms.algoritamGradijentnogSpusta(new Funkcija4(args[2]), Integer.parseInt(args[1]), null);
+		} else if(args[0].equals("newton")) {
+			NumOptAlgorithms.algoritamNewtonoveMetode(new Funkcija4(args[2]), Integer.parseInt(args[1]), null);
+		}
+		
+	}
+
+}

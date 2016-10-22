@@ -7,11 +7,8 @@
 <fullyQualifiedTypeName name="java.util.function.Function"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.Function"/>
 <fullyQualifiedTypeName name="org.apache.commons.math3.linear.LUDecomposition"/>
-<fullyQualifiedTypeName name="java.lang.Number"/>
-<fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.Function1"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.Function2"/>
-<fullyQualifiedTypeName name="org.apache.commons.math3.linear.RealVector"/>
 <fullyQualifiedTypeName name="javax.swing.event.TreeWillExpandListener"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.IFunction"/>
 <fullyQualifiedTypeName name="org.apache.commons.math3.linear.DecompositionSolver"/>
@@ -25,8 +22,6 @@
 <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.lang.Runtime"/>
-<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.Prijenosna"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.Funkcija4"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
@@ -35,4 +30,22 @@
 <fullyQualifiedTypeName name="org.apache.commons.math3.linear.Array2DRowRealMatrix"/>
 <fullyQualifiedTypeName name="org.apache.commons.math3.linear.RealMatrix"/>
 <fullyQualifiedTypeName name="org.apache.commons.math3.linear.SingularMatrixException"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="org.apache.commons.math3.linear.RealVector"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz2.Main"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.SingleObjectiveSolution"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.PassThroughDecoder"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.GreyBinaryDecoder"/>
+<fullyQualifiedTypeName name="java.lang.Number"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.NaturalBinaryDecoder"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.DoubleArrayUnifNeighborhood"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.BitvectorSolution"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.BitvectorDecoder"/>
+<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.DoubleArraySolution"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.IOptAlgorithm"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.IDecoder"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.INeighborhood"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

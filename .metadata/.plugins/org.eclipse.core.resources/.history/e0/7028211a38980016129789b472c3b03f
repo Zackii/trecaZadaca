@@ -1,0 +1,15 @@
+package hr.fer.zemris.optjava.dz3;
+
+public class SingleObjectiveSolution {
+
+	private double fitness;
+	private double value;
+	
+	public SingleObjectiveSolution() {
+	}
+	
+	public int compareTo(SingleObjectiveSolution solution) {
+		return (x < y) ? -1 : ((x == y) ? 0 : 1);
+	}
+	
+}
