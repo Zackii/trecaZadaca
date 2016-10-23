@@ -9,7 +9,6 @@ INDEX VERSION 1.129+C:\Users\nikol\workspace\PIOA\.metadata\.plugins\org.eclipse
 2462883004.index
 4101710603.index
 1004716384.index
-1324501807.index
 2017505986.index
 1545527915.index
 4166838873.index

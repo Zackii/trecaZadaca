@@ -7,13 +7,13 @@ public class BitvectorSolution {
 
 	public byte[] bits;
 
-	public BitvectorSolution(int numOfVariables) {
-		bits = new byte[numOfVariables];
+	public BitvectorSolution(int numOfBits) {
+		bits = new byte[numOfBits];
 	}
 
-	public BitvectorSolution newLikeThis() {
-		return null;
-	}
+//	public BitvectorSolution newLikeThis() {
+//		return null;
+//	}
 
 	public BitvectorSolution duplicate() {
 		BitvectorSolution duplicate = new BitvectorSolution(bits.length);
@@ -23,8 +23,8 @@ public class BitvectorSolution {
 		return duplicate;
 	}
 
-	public void randomize(Random rand) {
-		
-	}
+//	public void randomize(Random rand) {
+//		
+//	}
 
 }

@@ -8,13 +8,14 @@ import static java.lang.Math.exp;
 
 public class Function1 implements IFunction {
 
+	private static final int NUM_OF_VARIABLES = 6;
 	private static final int NUM_OF_LINES = 20;
 	private static final int VALUE_INDEX = 5;
 
 	private double[][] x;
 
 	public Function1(String filePath) {
-		EquationsReader reader = new EquationsReader(filePath, 6, 5);
+		EquationsReader reader = new EquationsReader(filePath, NUM_OF_LINES, NUM_OF_VARIABLES);
 		x = reader.getCoeffs();
 	}
 

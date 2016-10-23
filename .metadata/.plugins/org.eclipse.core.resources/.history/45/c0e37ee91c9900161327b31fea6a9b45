@@ -1,0 +1,47 @@
+package hr.fer.zemris.optjava.dz3;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import hr.fer.zemris.optjava.dz3.decoders.PassThroughDecoder;
+import hr.fer.zemris.optjava.dz3.functions.Function1;
+import hr.fer.zemris.optjava.dz3.neighborhoods.DoubleArrayUnifNeighborhood;
+import hr.fer.zemris.optjava.dz3.schedules.GeometricTempSchedule;
+import hr.fer.zemris.optjava.dz3.solutions.DoubleArraySolution;
+
+public class RegresijaSustava {
+	
+	private static final String SECOND_ARG_REGEX = "decimal|binary:\\d";
+
+	public static void main(String[] args) {
+		
+		if(!areArgsCorrect(args)) {
+			System.err.println("please make sure inputs are correct");
+			System.exit(1);
+		}
+		
+		if(args[1].equals("decimal")) {
+			
+			new SimulatedAnnealing<DoubleArraySolution>(new PassThroughDecoder(), new DoubleArrayUnifNeighborhood(new double[]{}), new DoubleArraySolution(6), new Function1(args[0]), true, new GeometricTempSchedule(0.0, 0.0, 0, 0));
+			
+		} else {
+			
+		}
+		
+	}
+	
+	private static boolean areArgsCorrect(String[] args) {
+		
+		if(args == null || args.length != 2) {
+			return false;
+		}
+		
+		Path filePath = Paths.get(args[0]);
+		if(!filePath.toFile().exists()) {
+			return false;
+		}
+		
+		return false;
+	}
+
+}

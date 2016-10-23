@@ -1,0 +1,22 @@
+package hr.fer.zemris.optjava.dz3.neighborhoods;
+
+import java.util.Random;
+
+import hr.fer.zemris.optjava.dz3.solutions.DoubleArraySolution;
+//normalna razdioba
+public class DoubleArrayNormNeighborhood implements INeighborhood<DoubleArraySolution> {
+
+	private double[] deltas; //delte
+	protected Random rand;
+	
+	public DoubleArrayNormNeighborhood(double[] deltas) {
+		
+	}
+
+	@Override
+	public DoubleArraySolution randomNeighbor(DoubleArraySolution solution) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

@@ -24,7 +24,9 @@ public class DoubleArraySolution extends SingleObjectiveSolution {
 	}
 	
 	public void randomize(Random rand, double[] mins, double[] maxs) {
-		
+		for(int i = 0; i < values.length; i++){
+			values[i] = mins[i] + rand.nextDouble() * (maxs[i] - mins[i]);
+		}
 	}
 	
 }

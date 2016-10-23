@@ -1,0 +1,86 @@
+package hr.fer.zemris.optjava.dz3;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Random;
+
+import hr.fer.zemris.optjava.dz3.decoders.IDecoder;
+import hr.fer.zemris.optjava.dz3.decoders.PassThroughDecoder;
+import hr.fer.zemris.optjava.dz3.functions.Function1;
+import hr.fer.zemris.optjava.dz3.functions.IFunction;
+import hr.fer.zemris.optjava.dz3.neighborhoods.DoubleArrayUnifNeighborhood;
+import hr.fer.zemris.optjava.dz3.neighborhoods.INeighborhood;
+import hr.fer.zemris.optjava.dz3.schedules.GeometricTempSchedule;
+import hr.fer.zemris.optjava.dz3.schedules.ITempSchedule;
+import hr.fer.zemris.optjava.dz3.solutions.DoubleArraySolution;
+
+public class RegresijaSustava {
+	
+	private static final String ARG_REGEX = "decimal|binary:\\d";
+	
+	private static final int NUM_OF_VARIABLES = 6;
+	
+	private static final double APLHA = 0.8;
+	private static final double T_INITIAL = 1000;
+	private static final int INNER_LIMIT = 100;
+	private static final int OUTER_LIMIT = 100;
+	
+	private static final double[] P_LINE1 = new double[] { -0.160, 2.320, -3.500, -2.660, 4.620, -171.36699979479872 };
+
+	public static void main(String[] args) {
+		
+		if(!areArgsCorrect(args)) {
+			System.err.println("please make sure inputs are correct");
+			System.exit(1);
+		}
+		
+		double[] deltas = new double[] { 0.01, 0.01, 0.01, 0.01, 0.01, 0.01 };
+		double[] lowerLimits = new double[] { -1, -1, -1, -1, -1, -1 };
+		double[] upperLimits = new double[] { 1, 1, 1, 1, 1, 1 };
+		
+		IDecoder<DoubleArraySolution> decoder;
+		INeighborhood<DoubleArraySolution> neighborhood;
+		DoubleArraySolution startWith;
+		
+		IFunction function = new Function1(args[0]);
+		boolean minimize = true;
+		ITempSchedule schedule = new GeometricTempSchedule(APLHA, T_INITIAL, INNER_LIMIT, OUTER_LIMIT);
+		
+		if(args[1].equals("decimal")) {
+			
+			decoder = new PassThroughDecoder();
+			neighborhood = new DoubleArrayUnifNeighborhood(deltas);
+			startWith = new DoubleArraySolution(NUM_OF_VARIABLES);
+			startWith.randomize(new Random(), lowerLimits, upperLimits);
+			
+			IOptAlgorithm<DoubleArraySolution> algorithm = new SimulatedAnnealing<>(decoder, neighborhood, startWith, function, minimize, schedule);
+			
+		} else {
+			decoder = new PassThroughDecoder();
+			neighborhood = new DoubleArrayUnifNeighborhood(deltas);
+			startWith = new DoubleArraySolution(NUM_OF_VARIABLES);
+			
+			new SimulatedAnnealing<DoubleArraySolution>(decoder, neighborhood, startWith, function, minimize, schedule);
+		}
+		
+	}
+	
+	private static boolean areArgsCorrect(String[] args) {
+		
+		if(args == null || args.length != 2) {
+			return false;
+		}
+		
+		Path filePath = Paths.get(args[0]);
+		if(!filePath.toFile().exists()) {
+			return false;
+		}
+		
+		if(!args[1].matches(ARG_REGEX)) {
+			return false;
+		}
+		
+		return true;
+	}
+
+}

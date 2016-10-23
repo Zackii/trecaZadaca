@@ -37,3 +37,5 @@
 1477219489859	Rename local variable 'iCounter'
 1477219497550	Rename local variable 'oCounter'
 1477221401477	Rename method 'acceptanceProbability'
+1477229409708	Delete element
+1477229467399	Rename resource 'transfer_function.txt'
