@@ -1,0 +1,48 @@
+package hr.fer.zemris.optjava.dz3.functions;
+
+import hr.fer.zemris.optjava.dz3.utilities.EquationsReader;
+
+import static java.lang.Math.cos;
+import static java.lang.Math.exp;
+
+public class Function1 implements IFunction {
+
+	private static final int NUM_OF_LINES = 20;	
+	private static final int FUNCTION_VALUE_INDEX = 5;
+	
+	private double[][] x;	
+	
+	public Function1(String filePath) {
+		EquationsReader reader = new EquationsReader(filePath, 6, 5);
+		x = reader.getCoeffs();
+	}
+	
+	@Override
+	public double valueAt(double[] coeffs) {
+		double squaredDiffsSum = 0;
+		double equationResult = 0;
+		double difference = 0;
+
+		for (int i = 0; i < NUM_OF_LINES; i++) {
+			equationResult = transferFunction(x[i] ,coeffs);
+
+			difference = equationResult - x[i][FUNCTION_VALUE_INDEX];
+			squaredDiffsSum += difference * difference;
+		}
+
+		return squaredDiffsSum;
+	}
+
+	private double transferFunction(double[] x, double[] c) {
+		double result = 0;
+
+		result = c[0] * x[0] + c[1] * x[0] * x[0] * x[0] * x[1];
+
+		result += c[2] * exp(c[3] * x[2]) * (1 + cos(c[4] * x[3]));
+
+		result += c[5] * x[3] * x[4] * x[4];
+
+		return result;
+	}
+	
+}

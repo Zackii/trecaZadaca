@@ -1,0 +1,20 @@
+package hr.fer.zemris.optjava.dz3.solutions;
+
+public class SingleObjectiveSolution {
+
+	// vrijednost koju vraca fitness funkcija za ovo rjesenje
+	private double fitness;
+	// neznm
+	private double value;
+
+	public SingleObjectiveSolution() {
+	}
+
+	public int compareTo(SingleObjectiveSolution anotherSolution) {
+		
+		double x = this.fitness;
+		double y = anotherSolution.fitness;
+		return (x < y) ? -1 : ((x == y) ? 0 : 1);
+	}
+
+}

@@ -4,3 +4,36 @@
 1477078205960	Delete element
 1477078266083	Delete element
 1477135414990	Delete element
+1477175992235	Rename field 'brojJednadzbi'
+1477176039667	Rename field 'numOfValuesPerRow'
+1477176477207	Rename local variable 'linija'
+1477176629648	Rename method 'procitajLiniju'
+1477176638882	Rename method 'readLIne'
+1477176714964	Rename local variable 'linija'
+1477216768414	Rename field 'values'
+1477216800659	Rename method 'vratiKoeficijente'
+1477217087096	Delete element
+1477217173716	Delete element
+1477217190362	Copy compilation unit
+1477217234884	Delete element
+1477217259895	Move compilation units
+1477217357518	Move compilation units
+1477217402209	Move compilation units
+1477217424457	Move compilation unit
+1477217469048	Move compilation unit
+1477217512350	Move compilation unit
+1477217637264	Move compilation units
+1477217684203	Move compilation units
+1477217701761	Rename package 'hr.fer.zemris.optjava.dz3.opt_algorithms'
+1477217714652	Move compilation unit
+1477218103866	Rename field 'currentTemp'
+1477218112106	Rename field 'iCurrent'
+1477218122696	Rename field 'initialTemp'
+1477218541491	Rename field 'xValues'
+1477218765249	Rename local variable 'variables'
+1477219324638	Rename local variable 'currentTemp'
+1477219346309	Rename method 'getInnerLoopConter'
+1477219478239	Rename local variable 'currentSolution'
+1477219489859	Rename local variable 'iCounter'
+1477219497550	Rename local variable 'oCounter'
+1477221401477	Rename method 'acceptanceProbability'

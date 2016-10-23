@@ -1,0 +1,103 @@
+package hr.fer.zemris.optjava.dz3;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class EquationsReader {
+	
+	// svaki redak je oblika: [n1, n2, ..., n10, y]
+	private static final String LINE_SPLIT_REGEX = ", +";
+	private static final String SQUARE_BRACKETS_REGEX = "\\[|\\]";
+	
+	private double[][] values;
+	private String filePath;
+
+	private int numOfValuesPerLine;
+	private int numOfEquations = 20;
+
+	public EquationsReader(String filePath, int numOfValuesPerLine) {
+		this.filePath = filePath;
+		this.numOfValuesPerLine = numOfValuesPerLine;
+		
+		values = new double[numOfEquations][numOfValuesPerLine];
+		
+		getValues();
+	}
+
+	private void getValues() {
+		BufferedReader fileReader = openFile();
+		
+		String line;
+		int i = 0;
+		while (true) {
+			line = readLine(fileReader);
+			if (line == null)
+				return;
+
+			line = line.trim();
+
+			if (line.isEmpty())
+				return;
+
+			if (line.startsWith("#")) //komentar
+				continue;
+
+			getValuesFromLine(line, i);
+			i++;
+		}
+		
+	}
+
+	private String readLine(BufferedReader fileReader) {
+		String line = null;
+		
+		try {
+			line = fileReader.readLine();
+		} catch (IOException e) {
+			throw new RuntimeException("Citanje datoteke nije uspjelo");
+		}
+		
+		return line;
+	}
+
+	private double[] getValuesFromLine(String line, int i) {
+		line = line.replaceAll(SQUARE_BRACKETS_REGEX, ""); //makni uglate zagrade
+		
+		String[] split = line.split(LINE_SPLIT_REGEX); //odvoji koeficijente
+
+		double[] koeficijenti = new double[numOfValuesPerLine];
+
+		for (int i = 0; i < numOfValuesPerLine; i++) {
+			koeficijenti[i] = Double.parseDouble(split[i]);
+		}
+
+		return koeficijenti;
+	}
+
+	private BufferedReader openFile() {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(filePath.toString())), StandardCharsets.UTF_8));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("Citanje datoteke nije uspjelo");
+		}
+		return br;
+	}
+	
+	public double[][] vratiKoeficijente() {
+		return values;
+	}
+	
+	public int vratiBrojJednadzbi() {
+		return numOfEquations;
+	}
+	
+	
+}

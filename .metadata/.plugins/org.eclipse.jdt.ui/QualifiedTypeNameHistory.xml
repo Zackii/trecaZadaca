@@ -39,13 +39,14 @@
 <fullyQualifiedTypeName name="java.lang.Number"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.NaturalBinaryDecoder"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.DoubleArrayUnifNeighborhood"/>
-<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.BitvectorSolution"/>
-<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.BitvectorDecoder"/>
 <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.DoubleArraySolution"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.IOptAlgorithm"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.IDecoder"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.BitvectorDecoder"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.INeighborhood"/>
+<fullyQualifiedTypeName name="hr.fer.zemris.optjava.dz3.BitvectorSolution"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
 </qualifiedTypeNameHistroy>

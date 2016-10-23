@@ -1,0 +1,30 @@
+package hr.fer.zemris.optjava.dz3;
+
+import hr.fer.zemris.optjava.dz3.decoders.IDecoder;
+import hr.fer.zemris.optjava.dz3.decoders.PassThroughDecoder;
+import hr.fer.zemris.optjava.dz3.functions.Function1;
+import hr.fer.zemris.optjava.dz3.functions.IFunction;
+import hr.fer.zemris.optjava.dz3.neighborhoods.DoubleArrayUnifNeighborhood;
+import hr.fer.zemris.optjava.dz3.neighborhoods.INeighborhood;
+import hr.fer.zemris.optjava.dz3.schedules.GeometricTempSchedule;
+import hr.fer.zemris.optjava.dz3.schedules.ITempSchedule;
+import hr.fer.zemris.optjava.dz3.solutions.DoubleArraySolution;
+
+public class RegresijaSustava {
+
+	public static void main(String[] args) {
+		
+		if(args[1].equals("decimal")) {
+			
+//			public SimulatedAnnealing(IDecoder<T> decoder, INeighborhood<T> neighborhood, T startWith, IFunction function,
+//					boolean minimize, ITempSchedule schedule) {
+			
+			new SimulatedAnnealing<DoubleArraySolution>(new PassThroughDecoder(), new DoubleArrayUnifNeighborhood(new double[]{}), new DoubleArraySolution(6), new Function1(args[0]), true, new GeometricTempSchedule(0.0, 0.0, 0, 0));
+			
+		} else if() {
+			
+		}
+		
+	}
+
+}

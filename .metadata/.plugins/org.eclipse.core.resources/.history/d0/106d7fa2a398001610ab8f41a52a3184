@@ -1,0 +1,41 @@
+package hr.fer.zemris.optjava.dz3;
+
+public class NaturalBinaryDecoder extends BitvectorDecoder {
+
+	public NaturalBinaryDecoder(double mins, double maxs, int bits, int n) {
+		super(mins, maxs, bits, n);
+	}
+
+	public NaturalBinaryDecoder(double[] mins, double[] maxs, int[] bits, int n) {
+		super(mins, maxs, bits, n);
+	}
+
+	public double[] decode(BitvectorSolution solution) {
+		double[] decodedSolution = new double[n];
+		int startIndex = 0;
+		int endIndex = 0;
+
+		for (int i = 0; i < n; i++) {
+			endIndex += bits[i];
+			decodedSolution[i] = decodeVariable(solution.bits, i, startIndex, endIndex);
+			startIndex = endIndex;
+		}
+		
+		
+		return null;
+	}
+	
+	private double decodeVariable(byte[] bits, int i, int startIndex, int endIndex) {
+		double decodedVariable;
+		
+		decodedVariable = mins[i] + boolArrayToInt(bits, startIndex, endIndex - 1)
+		* (maxs[i] - mins[i]) / (Math.pow((endIndex - startIndex), 2) - 1);
+		
+		return 0;
+	}
+
+	public void decode(BitvectorSolution bvs, double[] ds) {
+		
+	}
+	
+}

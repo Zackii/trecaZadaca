@@ -1,0 +1,49 @@
+package hr.fer.zemris.optjava.dz3;
+
+import java.util.Arrays;
+
+import hr.fer.zemris.optjava.dz3.solutions.BitvectorSolution;
+
+public abstract class BitvectorDecoder implements IDecoder<BitvectorSolution> {
+
+	protected double[] mins;
+	protected double[] maxs;
+	protected int[] bits;
+	protected int n;
+	protected int totalBits;
+
+	public BitvectorDecoder(double[] mins, double[] maxs, int[] bits, int n) {
+		this.n = n;
+		this.mins = Arrays.copyOf(mins, n);
+		this.maxs = Arrays.copyOf(maxs, n);
+		this.bits = Arrays.copyOf(bits, n);
+		
+		totalBits = 0;
+		for(int i : bits) {
+			totalBits += i;
+		}
+	}
+
+	public BitvectorDecoder(double min, double max, int bit, int n) {
+		this.n = n;
+		Arrays.fill(mins, min);
+		Arrays.fill(maxs, max);
+		Arrays.fill(bits, bit);
+		totalBits = bit * n;
+	}
+
+	public int getTotalBits() {
+		return totalBits;
+	}
+
+	public int getDimensions() {
+		return n;
+	}
+
+	@Override
+	public abstract double[] decode(BitvectorSolution solution);
+
+	@Override
+	public abstract void decode(BitvectorSolution solution, double[] vector);
+
+}

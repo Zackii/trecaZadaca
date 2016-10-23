@@ -1,0 +1,103 @@
+package hr.fer.zemris.optjava.dz3;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class EquationsReader {
+	
+	private static final String LINE_SPLIT_REGEX = ", +";
+	private static final String SQUARE_BRACKETS_REGEX = "\\[|\\]";
+	
+	private double[][] values;
+	private String filePath;
+	
+	// svaki redak je oblika: [n1, n2, ..., n10, y]
+	private int numOfValuesPerLine;
+	private int numOfEquations = 20;
+
+	public EquationsReader(String filePath, int brojKoeficijenataURedu) {
+		this.filePath = filePath;
+		this.numOfValuesPerLine = brojKoeficijenataURedu;
+		
+		values = new double[numOfEquations][brojKoeficijenataURedu];
+		
+		izvuciKoeficijente();
+	}
+
+	private void izvuciKoeficijente() {
+		BufferedReader citacToka = otvoriTok();
+		
+		String linija;
+		int i = 0;
+		while (true) {
+			linija = procitajLiniju(citacToka);
+			if (linija == null)
+				return;
+
+			linija = linija.trim();
+
+			if (linija.isEmpty())
+				return;
+
+			if (linija.startsWith("#")) //komentar
+				continue;
+
+			values[i] = izvuciKoeficijenteIzLinije(linija);
+			i++;
+		}
+		
+	}
+
+	private String procitajLiniju(BufferedReader citacToka) {
+		String linija = null;
+		
+		try {
+			linija = citacToka.readLine();
+		} catch (IOException e) {
+			throw new RuntimeException("Citanje datoteke nije uspjelo");
+		}
+		
+		return linija;
+	}
+
+	private double[] izvuciKoeficijenteIzLinije(String linija) {
+		linija = linija.replaceAll(ZAGRADE_REGEX, ""); //makni uglate zagrade
+		
+		String[] split = linija.split(LINIJE_RAZDJELI_REGEX); //odvoji koeficijente
+
+		double[] koeficijenti = new double[numOfValuesPerLine];
+
+		for (int i = 0; i < numOfValuesPerLine; i++) {
+			koeficijenti[i] = Double.parseDouble(split[i]);
+		}
+
+		return koeficijenti;
+	}
+
+	private BufferedReader otvoriTok() {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(filePath.toString())), StandardCharsets.UTF_8));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("Citanje datoteke nije uspjelo");
+		}
+		return br;
+	}
+	
+	public double[][] vratiKoeficijente() {
+		return values;
+	}
+	
+	public int vratiBrojJednadzbi() {
+		return numOfEquations;
+	}
+	
+	
+}
